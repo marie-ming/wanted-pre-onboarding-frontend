@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import NotFound from './pages/NotFound';
 import Todo from './pages/Todo';
@@ -15,20 +16,23 @@ import SignIn from './pages/SignIn';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to='/todo' replace />,
+    element: <App />,
     errorElement: <NotFound />,
-  },
-  {
-    path: '/todo',
-    element: <Todo />,
-  },
-  {
-    path: '/signin',
-    element: <SignIn />,
-  },
-  {
-    path: '/signup',
-    element: <SignUp />,
+    children: [
+      { index: true, element: <Navigate to='/todo' replace /> },
+      {
+        path: '/todo',
+        element: <Todo />,
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/signup',
+        element: <SignUp />,
+      },
+    ],
   },
 ]);
 
