@@ -1,9 +1,5 @@
 import request from '../core';
 
-interface TokenType {
-  access_token: string;
-}
-
 interface SignType {
   email: string;
   password: string;
@@ -11,7 +7,7 @@ interface SignType {
 
 export const AuthSignIn = async ({ email, password }: SignType) => {
   try {
-    const response: TokenType = await request({
+    const response = await request({
       data: {
         email,
         password,
@@ -19,9 +15,10 @@ export const AuthSignIn = async ({ email, password }: SignType) => {
       method: 'POST',
       url: '/auth/signin',
     });
-    window.localStorage.setItem('accessToken', response.access_token);
+    window.localStorage.setItem('accessToken', response.data.access_token);
     return response;
-  } catch (error) {
+  } catch (error: any) {
+    alert(error.response.data.message);
     console.log(error);
     return;
   }
