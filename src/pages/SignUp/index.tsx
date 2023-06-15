@@ -8,13 +8,21 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.localStorage.getItem('accessToken')) {
+      navigate('/todo');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onKeyPress = (event: { key: string }) => {
     if (event.key === 'Enter') {
       handleSubmit();
     }
   };
-  const navigate = useNavigate();
+
   const handleSubmit = () => {
     const response = AuthSignUp({ email, password });
     response.then((res) => {
