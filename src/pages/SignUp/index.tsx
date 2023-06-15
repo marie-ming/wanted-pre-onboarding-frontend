@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isValidEmail, isValidPassword } from '../../utils/utility';
 import '../../scss/sign.scss';
+import { AuthSignUp } from '../../apis/auth/auth';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -15,8 +16,15 @@ const SignUp = () => {
   };
   const navigate = useNavigate();
   const handleSubmit = () => {
-    alert('회원가입 성공!');
-    navigate(`/signin`);
+    const response = AuthSignUp({ email, password });
+    response.then((res) => {
+      if (res?.status === 201) {
+        alert('회원가입 성공!');
+        navigate(`/signin`);
+      } else {
+        console.log('가입실패');
+      }
+    });
   };
 
   useEffect(() => {
