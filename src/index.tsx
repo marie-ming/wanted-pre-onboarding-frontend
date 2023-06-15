@@ -1,15 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import NotFound from './pages/NotFound';
+import Todo from './pages/Todo';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Navigate to='/todo' replace />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: '/todo',
+    element: <Todo />,
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
