@@ -34,6 +34,20 @@ export const createTodo = async (todo: string) => {
   }
 };
 
+export const updateTodo = async ({ id, todo, isCompleted }: TodoType) => {
+  try {
+    const response = await request({
+      data: { todo, isCompleted },
+      method: 'PUT',
+      url: `/todos/${id}`,
+    });
+    return response.data;
+  } catch (error: any) {
+    console.log(error);
+    return;
+  }
+};
+
 export const deleteTodo = async (id: number) => {
   try {
     const response = await request({
