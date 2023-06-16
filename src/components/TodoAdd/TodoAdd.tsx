@@ -31,12 +31,17 @@ const TodoAdd = ({ list, setList }: Props) => {
     <form className={styles.form}>
       <input
         type='text'
+        data-testid='new-todo-input'
         placeholder='Add Todo'
         className={styles.input}
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
-      <button className={styles.button} onClick={handlerSubmit}>
+      <button
+        data-testid='new-todo-add-button'
+        className={styles.button}
+        onClick={handlerSubmit}
+      >
         Add
       </button>
     </form>

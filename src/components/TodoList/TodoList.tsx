@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HiOutlineTrash } from 'react-icons/hi';
 import { AiOutlineCheck } from 'react-icons/ai';
 import { BiEditAlt } from 'react-icons/bi';
+import { MdOutlineCancel } from 'react-icons/md';
 import { TodoType, deleteTodo, updateTodo } from '../../apis/todo/todo';
 import styles from './TodoList.module.css';
 
@@ -64,20 +65,30 @@ const TodoList = ({ item, setList }: Props) => {
           handleUpdate({ ...item, isCompleted: e.target.checked })
         }
       />
-      <input
-        type='text'
-        className={isEdit ? `${styles.input} ${styles.text}` : `${styles.text}`}
-        value={isEdit ? text : todo}
-        readOnly={!isEdit}
-        onChange={(e) => setText(e.target.value)}
-      />
+      {isEdit ? (
+        <input
+          type='text'
+          data-testid='modify-input'
+          className={`${styles.input} ${styles.text}`}
+          defaultValue={todo}
+          onChange={(e) => setText(e.target.value)}
+        />
+      ) : (
+        <span className={styles.text}>{todo}</span>
+      )}
+
       <span className={styles.icon}>
         {isEdit ? (
-          <button className={styles.button} onClick={todoUpdate}>
+          <button
+            data-testid='submit-button'
+            className={styles.button}
+            onClick={todoUpdate}
+          >
             <AiOutlineCheck />
           </button>
         ) : (
           <button
+            data-testid='modify-button'
             className={styles.button}
             onClick={() => setIsEdit((prev) => !prev)}
           >
@@ -86,9 +97,23 @@ const TodoList = ({ item, setList }: Props) => {
         )}
       </span>
       <span className={styles.icon}>
-        <button className={styles.button} onClick={handleDelete}>
-          <HiOutlineTrash />
-        </button>
+        {isEdit ? (
+          <button
+            data-testid='cancel-button'
+            className={styles.button}
+            onClick={() => setIsEdit((prev) => !prev)}
+          >
+            <MdOutlineCancel />
+          </button>
+        ) : (
+          <button
+            data-testid='delete-button'
+            className={styles.button}
+            onClick={handleDelete}
+          >
+            <HiOutlineTrash />
+          </button>
+        )}
       </span>
     </li>
   );
