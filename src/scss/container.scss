@@ -33,6 +33,11 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+  .link {
+    color: var(--color-grey);
+    font-size: 1rem;
+    margin-top: 0.6rem;
+  }
 }
 
 .list {

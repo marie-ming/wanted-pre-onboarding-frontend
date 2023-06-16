@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { isValidEmail, isValidPassword } from '../../utils/utility';
 import '../../scss/container.scss';
 import { AuthSignIn } from '../../apis/auth/auth';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +28,6 @@ const SignIn = () => {
     const response = AuthSignIn({ email, password });
     response.then((res) => {
       if (res?.status === 200) {
-        alert('로그인 성공!');
         navigate(`/todo`);
       } else {
         console.log('로그인실패');
@@ -66,6 +66,9 @@ const SignIn = () => {
       >
         로그인
       </button>
+      <Link to='/signup' className='link'>
+        회원가입
+      </Link>
     </section>
   );
 };
