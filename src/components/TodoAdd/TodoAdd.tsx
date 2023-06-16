@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import styles from './TodoAdd.module.css';
+import { TodoType, createTodo } from '../../apis/todo/todo';
 
-const TodoAdd = () => {
+interface Props {
+  list: Array<TodoType>;
+  setList: React.Dispatch<React.SetStateAction<Array<TodoType>>>;
+}
+
+const TodoAdd = ({ list, setList }: Props) => {
   const [text, setText] = useState('');
 
   const handlerSubmit = (e: { preventDefault: () => void }) => {
@@ -10,7 +16,14 @@ const TodoAdd = () => {
       setText('');
       return;
     }
-
+    const response = createTodo(text);
+    response.then((res) => {
+      if (!res) {
+        console.log('투두 등록 실패');
+      } else {
+        setList([...list, res]);
+      }
+    });
     setText('');
   };
 

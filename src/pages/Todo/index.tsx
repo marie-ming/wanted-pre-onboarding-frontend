@@ -7,24 +7,23 @@ import { TodoType, getTodos } from '../../apis/todo/todo';
 
 const Todo = () => {
   const navigate = useNavigate();
+  const [list, setList] = useState<TodoType[]>([]);
+
   useEffect(() => {
     if (!window.localStorage.getItem('accessToken')) {
       navigate('/signin');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const [list, setList] = useState<TodoType[]>([]);
-
-  useEffect(() => {
     const response = getTodos();
     response.then((res) => {
       if (!res) {
         console.log('투두 조회 실패');
       } else {
-        setList(res.data);
+        setList(res);
       }
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -39,7 +38,7 @@ const Todo = () => {
           />
         ))}
       </ul>
-      <TodoAdd />
+      <TodoAdd list={list} setList={setList} />
     </div>
   );
 };

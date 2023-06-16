@@ -13,7 +13,21 @@ export const getTodos = async () => {
       method: 'GET',
       url: '/todos',
     });
-    return response;
+    return response.data;
+  } catch (error: any) {
+    console.log(error);
+    return;
+  }
+};
+
+export const createTodo = async (todo: string) => {
+  try {
+    const response = await request({
+      data: { todo },
+      method: 'POST',
+      url: '/todos',
+    });
+    return response.data;
   } catch (error: any) {
     console.log(error);
     return;
