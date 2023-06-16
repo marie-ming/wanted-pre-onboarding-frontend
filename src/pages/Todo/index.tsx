@@ -30,12 +30,7 @@ const Todo = () => {
     <div className='container' style={{ alignItems: 'inherit' }}>
       <ul className='list'>
         {list.map((item: TodoType) => (
-          <TodoList
-            key={item.id}
-            id={item.id}
-            todo={item.todo}
-            isCompleted={item.isCompleted}
-          />
+          <TodoList key={item.id} item={item} list={list} setList={setList} />
         ))}
       </ul>
       <TodoAdd list={list} setList={setList} />

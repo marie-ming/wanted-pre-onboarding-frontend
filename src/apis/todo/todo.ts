@@ -33,3 +33,16 @@ export const createTodo = async (todo: string) => {
     return;
   }
 };
+
+export const deleteTodo = async (id: number) => {
+  try {
+    const response = await request({
+      method: 'DELETE',
+      url: `/todos/${id}`,
+    });
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    return;
+  }
+};
