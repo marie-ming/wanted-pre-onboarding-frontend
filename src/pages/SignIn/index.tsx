@@ -43,7 +43,7 @@ const SignIn = () => {
     <section className='container'>
       <input
         type='email'
-        className='container_child'
+        className='container_child input'
         data-testid='email-input'
         placeholder='이메일'
         name='email'
@@ -51,7 +51,7 @@ const SignIn = () => {
       />
       <input
         type='password'
-        className='container_child'
+        className='container_child input'
         data-testid='password-input'
         placeholder='비밀번호'
         name='password'
@@ -59,7 +59,7 @@ const SignIn = () => {
         onKeyUp={onKeyPress}
       />
       <button
-        className='container_child'
+        className='container_child button'
         data-testid='signin-button'
         disabled={!isValid}
         onClick={handleSubmit}
