@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { isValidEmail, isValidPassword } from '../../utils/utility';
-import '../../scss/sign.scss';
+import '../../scss/container.scss';
 import { AuthSignIn } from '../../apis/auth/auth';
 
 const SignIn = () => {
